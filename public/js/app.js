@@ -1,35 +1,32 @@
 // client-side js code
 
-// Change background image
-window.addEventListener('DOMContentLoaded', () => {
-   let day = new Date();
-   let time = day.getHours();
-   console.log(time)
+// Change background image depending on time of day
+window.addEventListener("DOMContentLoaded", () => {
+  let day = new Date();
+  let time = day.getHours();
+  console.log(time);
 
-   // if time is past 7PM and before 5 AM
-   if (time >= 19 || time <= 5) {
-      document.querySelector('#weather-mode').classList.add('night');
-   } else {
-      document.querySelector('#weather-mode').classList.add('day');
-   }
-
+  // if time is past 7PM and before 5 AM
+  if (time >= 19 || time <= 5) {
+    document.querySelector("#weather-mode").classList.add("night");
+  } else {
+    document.querySelector("#weather-mode").classList.add("day");
+  }
 });
 
-
 // Fetch Weather
-const weatherForm = document.querySelector('form'),
-      search = document.querySelector('input');
+const weatherForm = document.querySelector("form"),
+  search = document.querySelector("input");
 
-weatherForm.addEventListener('submit', (e) => {
-   console.log(search.value)
-   const location = search.value;
+weatherForm.addEventListener("submit", e => {
+  console.log(search.value);
+  const location = search.value;
 
-   fetch('http://localhost:3000/weather?address=' + location )
-      .then((response) => {
-         response.json().then((data) => {
-            if (data.error) {
-               const errorDisplay = document.querySelector('.forecast');
-               errorDisplay.innerHTML = `
+  fetch("/weather?address=" + location).then(response => {
+    response.json().then(data => {
+      if (data.error) {
+        const errorDisplay = document.querySelector(".forecast");
+        errorDisplay.innerHTML = `
                <div class="container">
                   <div class="row">
                      <div class="alert">
@@ -38,10 +35,10 @@ weatherForm.addEventListener('submit', (e) => {
                   </div>
                </div>  
                `;
-                console.log(data.error)
-            } else {
-               const summary = document.querySelector('.forecast');
-               summary.innerHTML = `
+        console.log(data.error);
+      } else {
+        const summary = document.querySelector(".forecast");
+        summary.innerHTML = `
                   <div class="container">
                      <div class="row">
                      <div class="summary">
@@ -56,7 +53,9 @@ weatherForm.addEventListener('submit', (e) => {
                               <img src="../img/dew.png" alt="prespitation" class="svg-icon">
                            </div>
                            <div class="columns six">
-                              <h2 class="title">${data.forecast.precipitation}</h2>
+                              <h2 class="title">${
+                                data.forecast.precipitation
+                              }</h2>
                               <p class="desc">Precipitation</p>
                            </div>
                            </div>
@@ -78,7 +77,9 @@ weatherForm.addEventListener('submit', (e) => {
                               <img src="../img/wind.svg" alt="wind" class="svg-icon">
                            </div>
                            <div class="columns six">
-                              <h2 class="title">${data.forecast.wind} <span>kph</span></h2>
+                              <h2 class="title">${
+                                data.forecast.wind
+                              } <span>kph</span></h2>
                               <p class="desc">Wind</p>
                            </div>
                            </div>
@@ -87,13 +88,11 @@ weatherForm.addEventListener('submit', (e) => {
                      </div>
                   </div>
                `;
-               // console.log(data.forecast)
-               console.log(data.location)
-            }
+        // console.log(data.forecast)
+        console.log(data.location);
+      }
+    });
+  });
 
-         })
-      })
-   
-   e.preventDefault();
+  e.preventDefault();
 });
-
