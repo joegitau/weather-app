@@ -1,12 +1,14 @@
 # weather-app
-Node.JS Weather App
+A Node.JS powered Weather Application.
 
-Devloped using NODE.JS, The Weather API is developed using NODE.JS - taking into use depedencies including Express, Joi, 
+
+Devloped using NODE.JS, The Weather API, takes into use depedencies including Express, Joi, 
 Request among others. It also puts into use the HBS Templating Engine to render the HTML pages.
 
-It integrates with two APIs to fetch real-time data of current weather conditions across the globe. 
+As the title suggests, the application's core use is to provide current weather conditions for all locations in the world.
 
-These APIs are namely:
+To facilitate this, the application fetches data from two APIs namely: 
+
 
 1. Dark Sky API:
    The Dark Sky API offers a full collection of meteorological conditions in 39 different languages. 
@@ -21,7 +23,15 @@ These APIs are namely:
     - Forward geocoding converts location text into geographic coordinates
     - Reverse geocoding on the other hand turns geographic coordinates into place names.
     
-    
+
+In summary; 
+
+The functionality of the application requires that both APIs work in tandem to effectively provide data to a user. Once a user types in a city, country or the postal code of a particular location, the data is sent to the Mapox API which converts the text into coordinates which are then mapped as query strings in the DarkSky's endpoints to finally provide the relevant response, in this case, the weather conditions of that particular user search text.
+
+The Front-end uses HBS, template engine which also includes minor features such as background color changes depending on a locaton's time of dat.
+
+Enjoy.
+
 
 Developed with 💜 by Joseph Gitau
 
